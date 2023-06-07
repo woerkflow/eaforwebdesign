@@ -27,7 +27,7 @@
         let output = []
 
         //1000 iterations to test the algorithm
-        for (let i = 0; i < 1000; i++) {
+        for (let i = 0; i < 100; i++) {
             const start = performance.now()
             //Chrom-Generation
             output = EA.run(range_population.value, 18, select_category.value, range_generations.value, select_refresh.value, select_crossover.value, select_mutation.value)
@@ -114,31 +114,31 @@
                         <label class="mb-2" for="category">Select a category</label>
                         <select class="form-control" id="category">
                             <option value="b2b">Business to Business</option>
-                            <option value="neutral">NEUTRAL</option>
+                            <option value="neutral">Neutral</option>
                             <option value="b2c">Business to Customer</option>
                         </select>
                     </section>
                     <section class="mb-3">
                         <label class="mb-2" for="refresh">Select a refreshed step-operator</label>
                         <select class="form-control" id="refresh">
-                            <option value="true">TRUE</option>
-                            <option value="false">FALSE</option>
+                            <option value="true">True</option>
+                            <option value="false">False</option>
                         </select>
                     </section>
                     <section class="mb-3">
                         <label class="mb-2" for="crossover">Select a crossover-operator</label>
                         <select class="form-control" id="crossover">
-                            <option value="true">TRUE</option>
-                            <option value="false">FALSE</option>
+                            <option value="true">True</option>
+                            <option value="false">False</option>
                         </select>
                     </section>
                     <section class="mb-3">
                         <label class="mb-2" for="mutation">Select a mutation-operator</label>
                         <select class="form-control" id="mutation">
-                            <option value="flip">FLIP</option>
-                            <option value="value">VALUE</option>
-                            <option value="swap">SWAP</option>
-                            <option value="reverse">REVERSE</option>
+                            <option value="flip">Flip</option>
+                            <option value="value">Value</option>
+                            <option value="swap">Swap</option>
+                            <option value="reverse">Reverse</option>
                         </select>
                     </section>
                     <section class="mb-3">
