@@ -103,19 +103,14 @@ const EA = {
         let child1 = []
         let child2 = []
         let children = []
-
         for(let i = 0; i < 2; i++) {
             pop.pop()
         }
-
-        //crossover
         if (cross === "true") {
             children = this.crossover(pop[0], pop[1])
         } else {
             children.push(pop[0], pop[1])
         }
-
-        //mutations
         if (mutation === "flip") {
             child1 = this.flipMutation(children[0])
             child2 = this.flipMutation(children[1])
