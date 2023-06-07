@@ -5,6 +5,7 @@ const Test = {
         let key_green = 0
         let key_blue = 0
         let fitness = 0
+
         if (category === "b2b") {
             for (let index = chrom.length - 1; index >= 0; index--) {
                 switch(index) {
@@ -81,9 +82,9 @@ const Test = {
                             fitness += 1
                         } else if (key_blue > key_green && key_blue > key_red && key_green === key_red) {
                             fitness += 0.75
-                        } else if (key_blue == key_green && key_blue > key_red) {
+                        } else if (key_blue === key_green && key_blue > key_red) {
                             fitness += 0.5
-                        } else if (key_blue == key_green && key_blue == key_red && key_blue < 255) {
+                        } else if (key_blue === key_green && key_blue === key_red && key_blue < 255) {
                             fitness += 0.25
                         }
                         break;
@@ -296,7 +297,7 @@ const Test = {
                         break;
                     case 4: // key color (R): 0 / 51 / 102 / 153 / 204 / 255
                         key_red = chrom[index] * 51
-                        if (key_blue == key_green && key_blue == key_red && key_blue < 255) { 
+                        if (key_blue === key_green && key_blue === key_red && key_blue < 255) {
                             fitness += 1
                         } else if ((key_red > key_green && key_green === key_blue && key_red - key_green === 51) || 
                                    (key_red < key_green && key_green === key_blue && key_green - key_red === 51) ||

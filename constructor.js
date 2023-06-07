@@ -1,16 +1,16 @@
 const Constructor = {
 
     do(element, chrom) {
+        const weight = ["200", "300", "400", "500", "600", "700"]
+        const space = [".25", ".5", "0.75", "1", "1.25", "1.5"]
+        const radius = [".125", ".25", ".375", ".5", ".75", "1"]
+        const font_family = ["Verdana", "Tahoma", "Trebuchet MS", "Times New Roman", "Georgia", "Garamond"]
 
-        key_red = 0
-        key_green = 0
-        key_blue = 0
-        weight = ["200", "300", "400", "500", "600", "700"]
-        space = [".25", ".5", "0.75", "1", "1.25", "1.5"]
-        radius = [".125", ".25", ".375", ".5", ".75", "1"]
-        font_family = ["Verdana", "Tahoma", "Trebuchet MS", "Times New Roman", "Georgia", "Garamond"]
-        border = false
-        shadow = false
+        let key_red = 0
+        let key_green = 0
+        let key_blue = 0
+        let border = false
+        let shadow = false
 
         for (let index = chrom.length - 1; index >= 0; index--) {
             switch(index) {

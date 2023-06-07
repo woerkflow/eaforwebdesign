@@ -47,17 +47,17 @@
         plot(duration, 10, "plot_duration", "Runtime")
 
         //AVG Badges
-        const fitlabel = document.querySelector("#fit_label")
-        fitlabel.textContent = calculateAverage(fitness)
-        const durlabel = document.querySelector("#dur_label")
-        durlabel.textContent = calculateAverage(duration)
+        const fitLabel = document.querySelector("#fitLabel")
+        fitLabel.textContent = calculateAverage(fitness)
+        const durLabel = document.querySelector("#durLabel")
+        durLabel.textContent = calculateAverage(duration)
     }
 
     function calculateAverage(array) {
         let total = 0;
         let count = 0;
 
-        array.forEach(function(item, index) {
+        array.forEach(function(item) {
             total += item;
             count++;
         });
@@ -88,25 +88,25 @@
         Plotly.newPlot(location, data, layout);
     }
 
-    window.addEventListener("load", (event) => {
-        const value_pop = document.querySelector("#pop_label")
-        const input_pop = document.querySelector("#population")
-        value_pop.textContent = input_pop.value
-        input_pop.addEventListener("input", (event) => {
-            value_pop.textContent = event.target.value
+    window.addEventListener("load", () => {
+        const valuePop = document.querySelector("#popLabel")
+        const inputPop = document.querySelector("#population")
+        valuePop.textContent = inputPop.value
+        inputPop.addEventListener("input", (event) => {
+            valuePop.textContent = event.target.value
         })
-        const value_gen = document.querySelector("#gen_label")
-        const input_gen = document.querySelector("#generations")
-        value_gen.textContent = input_gen.value
-        input_gen.addEventListener("input", (event) => {
-            value_gen.textContent = event.target.value
+        const valueGen = document.querySelector("#genLabel")
+        const inputGen = document.querySelector("#generations")
+        valueGen.textContent = inputGen.value
+        inputGen.addEventListener("input", (event) => {
+            valueGen.textContent = event.target.value
         })
     });
 </script>
  
 <body>
     <section class="container p-3">
-        <h2 class="display-1 mb-3">Evolutional Algorithm for Webdesign</h2>
+        <h2 class="display-1 mb-3">Evolutionary Algorithm for Webdesign</h2>
         <section class="row">
             <article class="col-6">
                 <form class="border border-1 p-4 mb-3">
@@ -142,16 +142,16 @@
                         </select>
                     </section>
                     <section class="mb-3">
-                        <label class="control-label" for="population">Population <span class="badge bg-secondary" id="pop_label">500</span></label>
-                        <input class="form-range" type="range" min="1" max="50" id="population"></input>
+                        <label class="control-label" for="population">Population <span class="badge bg-secondary" id="popLabel">500</span></label>
+                        <input class="form-range" type="range" min="5" max="40" id="population">
                     </section>
                     <section class="mb-3">
-                        <label class="control-label" for="generations">Generations <span class="badge bg-secondary" id="gen_label">500</span></label>
-                        <input class="form-range" type="range" min="0" max="1000" id="generations"></input>
+                        <label class="control-label" for="generations">Generations <span class="badge bg-secondary" id="genLabel">500</span></label>
+                        <input class="form-range" type="range" min="0" max="1000" id="generations">
                     </section>
                     <section class="mb-3 row">
-                        <label class="col-5 control-label">Avg Fitness <span class="badge bg-secondary" id="fit_label">0</span></label>
-                        <label class="col-5 control-label">Avg Runtime <span class="badge bg-secondary" id="dur_label">0</span></label>
+                        <label class="col-5 control-label">Avg Fitness <span class="badge bg-secondary" id="fitLabel">0</span></label>
+                        <label class="col-5 control-label">Avg Runtime <span class="badge bg-secondary" id="durLabel">0</span></label>
                         <div class="col-2 d-flex justify-content-end">
                             <div class="d-flex justify-content-center align-items-center btn btn-primary" onclick="parse()">Generate</div>
                         </div>
@@ -172,23 +172,23 @@
                     </section>
                     <section class="test">
                         <textarea class="test w-100 form-control" rows="3" placeholder="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua." maxlength="120" id="4"></textarea>
-                        <label class="test">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</label>
+                        <label for=4 class="test">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</label>
                     </section>
                     <section class="test">
                         <input class="test w-100 form-control" placeholder="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua." id="5" maxlength="30">
-                        <label class="test">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</label>
+                        <label for=5 class="test">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</label>
                     </section>
                     <section class="test">
                         <input class="test w-100 form-control" type="date" id="8">
-                        <label class="test">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</label>
+                        <label for=8 class="test">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</label>
                     </section>
                     <section class="test">
                         <input class="test w-100 form-control" type="time" id="9">
-                        <label class="test">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</label>
+                        <label for=9 class="test">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</label>
                     </section>
                     <section class="test">
                         <input class="test" type="checkbox" id="2">
-                        <label class="test">I am a checkbox</label>
+                        <label for=2 class="test">I am a checkbox</label>
                     </section>
                     <section class="test">
                         <button class="test btn" id="6">Submit</button>
