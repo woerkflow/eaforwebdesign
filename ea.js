@@ -1,9 +1,10 @@
 const EA = {
 
     heapify(pop, n, i, category) {
-        let largest = i
         const left = 2 * i + 1
         const right = 2 * i + 2
+
+        let largest = i
       
         if (left < n && Test.fitness(pop[left], category) > Test.fitness(pop[largest], category)) {
           largest = left
