@@ -1,5 +1,4 @@
 const EA = {
-
     heapify(pop, n, i, category) {
         const left = 2 * i + 1
         const right = 2 * i + 2

@@ -89,7 +89,7 @@ const Constructor = {
                     }
                     if (element.tagName === "BUTTON") {
                         element.style.backgroundColor = "rgb(" + key_red + "," + key_green + "," + key_blue + ")"
-                        if (((Constructor.contrast(key_red, key_green, key_blue) + 0.05)/(Constructor.contrast(0, 0, 0) + 0.05)) > 10.5) {
+                        if (((this.contrast(key_red, key_green, key_blue) + 0.05)/(this.contrast(0, 0, 0) + 0.05)) > 10.5) {
                             element.style.color = "black"
                         } else {
                             element.style.color = "white"
