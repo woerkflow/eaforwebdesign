@@ -102,7 +102,7 @@ const Constructor = {
                     }
                     break;
                 case 2:
-                    if ((element.tagName === "FORM" || element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "BUTTON")) {
+                    if (element.tagName === "FORM") {
                         if (border) {
                             element.style.borderWidth = (chrom[index] + 1) + "px"
                             element.style.borderStyle = "solid"

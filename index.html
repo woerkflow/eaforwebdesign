@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <title>Evolutionary Algorithm for Webdesign</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="js/fitness.js"></script>
-    <script src="js/ea.js"></script>
-    <script src="js/constructor.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="js/fitness.js" type="text/javascript"></script>
+    <script src="js/ea.js" type="text/javascript"></script>
+    <script src="js/constructor.js" type="text/javascript"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js" type="text/javascript"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
     <script type="text/javascript">
         function parse() {
+            const select_random = document.querySelector('#random')
             const select_category = document.querySelector('#category')
+            const select_selection = document.querySelector('#selection')
             const select_refresh = document.querySelector('#refresh')
             const select_crossover = document.querySelector('#crossover')
             const select_mutation = document.querySelector('#mutation')
@@ -27,7 +29,7 @@
             for (let i = 0; i < 100; i++) {
                 const start = performance.now()
                 //Chrom-Generation
-                output = EA.run(range_population.value, 18, select_category.value, range_generations.value, select_refresh.value, select_crossover.value, select_mutation.value)
+                output = EA.run(range_population.value, 18, select_category.value, range_generations.value, select_refresh.value, select_random.value, select_selection.value, select_crossover.value, select_mutation.value)
                 const time = performance.now()
                 fitness.push(Test.fitness(output, select_category.value))
                 duration.push(time - start)
@@ -86,6 +88,12 @@
         }
 
         window.addEventListener("load", () => {
+            const valueRandom = document.querySelector("#randomLabel")
+            const inputRandom = document.querySelector("#random")
+            valueRandom.textContent = inputRandom.value
+            inputRandom.addEventListener("input", (event) => {
+                valueRandom.textContent = event.target.value
+            })
             const valuePop = document.querySelector("#popLabel")
             const inputPop = document.querySelector("#pop")
             valuePop.textContent = inputPop.value
@@ -105,27 +113,38 @@
     <section class="container p-3">
         <h2 class="display-1 mb-3">Evolutionary Algorithm for Webdesign</h2>
         <section class="row">
-            <article class="col-6">
-                <form class="border border-1 p-4 mb-3">
+            <article class="col-12 col-lg-6 ps-lg-0">
+                <form class="border border-1 p-2 p-lg-4 mb-3">
                     <section class="mb-3">
-                        <label class="mb-2" for="category">Select a category</label>
+                        <label class="mb-2" for="category">Select a category (Difficulty in ascending order)</label>
                         <select class="form-control" id="category">
+                            <option value="b2c">Business to Customer</option>
                             <option value="b2b">Business to Business</option>
                             <option value="neutral">Neutral</option>
-                            <option value="b2c">Business to Customer</option>
                         </select>
                     </section>
                     <section class="mb-3">
-                        <label class="mb-2" for="refresh">Select a refreshed step-operator</label>
-                        <select class="form-control" id="refresh">
-                            <option value="true">True</option>
-                            <option value="false">False</option>
+                        <label class="mb-2" for="selection">Select a selection-operator</label>
+                        <select class="form-control" id="selection">
+                            <option value="true">Sequential Selection</option>
+                            <option value="false" selected>Top 2 Selection (Recommended)</option>
                         </select>
+                    </section>
+                    <section class="mb-3">
+                        <label class="mb-2" for="refresh">Select a step-operator</label>
+                        <select class="form-control" id="refresh">
+                            <option value="true">Random Restart (Please set the random ratio)</option>
+                            <option value="false" selected>Normal (Recommended)</option>
+                        </select>
+                    </section>
+                    <section class="mb-3">
+                        <label class="control-label" for="random">Random Ratio <span class="badge bg-secondary" id="randomLabel">0</span></label>
+                        <input class="form-range" type="range" min="0" max="1" step="0.01" id="random">
                     </section>
                     <section class="mb-3">
                         <label class="mb-2" for="crossover">Select a crossover-operator</label>
                         <select class="form-control" id="crossover">
-                            <option value="true">True</option>
+                            <option value="true" selected>True (Recommended)</option>
                             <option value="false">False</option>
                         </select>
                     </section>
@@ -133,7 +152,7 @@
                         <label class="mb-2" for="mutation">Select a mutation-operator</label>
                         <select class="form-control" id="mutation">
                             <option value="flip">Flip</option>
-                            <option value="value">Value</option>
+                            <option value="value" selected>Value (Recommended)</option>
                             <option value="swap">Swap</option>
                             <option value="reverse">Reverse</option>
                         </select>
@@ -147,19 +166,13 @@
                         <input class="form-range" type="range" min="0" max="1000" id="gen">
                     </section>
                     <section class="mb-3 row">
-                        <label class="col-5 control-label">Avg Fitness <span class="badge bg-secondary" id="fitLabel">0</span></label>
-                        <label class="col-5 control-label">Avg Runtime <span class="badge bg-secondary" id="durLabel">0</span></label>
-                        <div class="col-2 d-flex justify-content-end">
+                        <div class="col-12 d-flex justify-content-end">
                             <div class="d-flex justify-content-center align-items-center btn btn-primary" onclick="parse()">Generate</div>
                         </div>
                     </section>
-                    <section class="">
-                        <div class="" id="plot_fitness"></div>
-                        <div class="" id="plot_duration"></div>
-                    </section>
                 </form>
             </article>
-            <article class="col-6">
+            <article class="col-12 col-lg-6 pe-lg-0">
                 <form class="test">
                     <section class="test">
                         <h2 class="test" id="1">Hello!</h2>
@@ -189,6 +202,18 @@
                     </section>
                     <section class="test">
                         <button class="test btn" id="6">Submit</button>
+                    </section>
+                </form>
+            </article>
+            <article class="col-12 mt-3 p-3 p-lg-0">
+                <form class="border border-1 p-2 p-lg-4 m-0">
+                    <section class="col-12 d-flex justify-content-evenly p-0">
+                        <label class="control-label">Avg Fitness <span class="badge bg-secondary" id="fitLabel">0</span></label>
+                        <label class="control-label">Avg Runtime <span class="badge bg-secondary" id="durLabel">0</span></label>
+                    </section>
+                    <section class="col-12 p-0">
+                        <div id="plot_fitness"></div>
+                        <div id="plot_duration"></div>
                     </section>
                 </form>
             </article>
