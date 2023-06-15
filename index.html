@@ -55,7 +55,6 @@
         function calculateAverage(array) {
             let total = 0;
             let count = 0;
-
             array.forEach(function(item) {
                 total += item;
                 count++;
@@ -84,22 +83,39 @@
                 yaxis: {autorange: true},
                 title: title
             };
+
             Plotly.newPlot(location, data, layout);
         }
 
         window.addEventListener("load", () => {
+
             const valueRandom = document.querySelector("#randomLabel")
             const inputRandom = document.querySelector("#random")
             valueRandom.textContent = inputRandom.value
             inputRandom.addEventListener("input", (event) => {
                 valueRandom.textContent = event.target.value
             })
+
+            const selectRefresh = document.querySelector("#refresh")
+            const sectionRandom = document.querySelector("#random-section")
+            selectRefresh.addEventListener("change", () => {
+                console.log(selectRefresh.value)
+                if (selectRefresh.value === "true") {
+                    sectionRandom.style.display = "block";
+                    sectionRandom.style.cssText = 'display:block !important';
+                } else {
+                    sectionRandom.style.display = "none";
+                    sectionRandom.style.cssText = 'display:none !important';
+                }
+            })
+
             const valuePop = document.querySelector("#popLabel")
             const inputPop = document.querySelector("#pop")
             valuePop.textContent = inputPop.value
             inputPop.addEventListener("input", (event) => {
                 valuePop.textContent = event.target.value
             })
+
             const valueGen = document.querySelector("#genLabel")
             const inputGen = document.querySelector("#gen")
             valueGen.textContent = inputGen.value
@@ -111,7 +127,7 @@
 </head>
 <body>
     <section class="container p-3">
-        <h2 class="display-1 mb-3">Evolutionary Algorithm for Webdesign</h2>
+        <h2 class="display-1 mt-3 mb-5">Evolutionary Algorithm for Webdesign</h2>
         <section class="row">
             <article class="col-12 col-lg-6 ps-lg-0">
                 <form class="border border-1 p-2 p-lg-4 mb-3">
@@ -126,11 +142,11 @@
                     <section class="mb-3">
                         <label class="mb-2" for="refresh">Select a step-operator</label>
                         <select class="form-control" id="refresh">
-                            <option value="true">Random Restart (Please set the random ratio)</option>
+                            <option value="true">Random Restart</option>
                             <option value="false" selected>Normal (Recommended)</option>
                         </select>
                     </section>
-                    <section class="mb-3">
+                    <section class="mb-3 d-none" id="random-section">
                         <label class="control-label" for="random">Select a random ratio <span class="badge bg-secondary" id="randomLabel">0</span></label>
                         <input class="form-range" type="range" min="0" max="1" step="0.01" id="random">
                     </section>
@@ -172,7 +188,7 @@
                     </section>
                 </form>
             </article>
-            <article class="col-12 col-lg-6 pe-lg-0">
+            <article class="col-12 col-lg-6 mt-3 mt-lg-0 pe-lg-0">
                 <form class="test">
                     <section class="test">
                         <h2 class="test" id="1">Hello!</h2>
