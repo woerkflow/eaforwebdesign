@@ -5,7 +5,6 @@ const Test = {
         let key_green = 0
         let key_blue = 0
         let fitness = 0
-
         if (category === "b2b") {
             for (let index = chrom.length - 1; index >= 0; index--) {
                 switch(index) {

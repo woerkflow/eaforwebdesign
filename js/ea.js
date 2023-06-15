@@ -1,46 +1,14 @@
 const EA = {
 
-    heapify(pop, n, i, category) {
-        const left = 2 * i + 1
-        const right = 2 * i + 2
-
-        let largest = i
-      
-        if (left < n && Test.fitness(pop[left], category) > Test.fitness(pop[largest], category)) {
-          largest = left
-        }
-      
-        if (right < n && Test.fitness(pop[right], category) > Test.fitness(pop[largest], category)) {
-          largest = right
-        }
-      
-        if (largest !== i) {
-          [pop[i], pop[largest]] = [pop[largest], pop[i]]
-          this.heapify(pop, n, largest, category)
-        }
-    },
-      
-    buildHeap(pop, category) {
-        const n = pop.length;
-        const startIdx = Math.floor(n / 2) - 1;
-        for (let i = startIdx; i >= 0; i--) {
-            this.heapify(pop, n, i, category)
-        }
-        return pop
-    },
-
     mergeSort(pop, category) {
         if (pop.length <= 1) {
             return pop;
         }
-
         const mid = Math.floor(pop.length / 2);
         const left = pop.slice(0, mid);
         const right = pop.slice(mid);
-
         const sortedLeft = this.mergeSort(left, category);
         const sortedRight = this.mergeSort(right, category);
-
         return this.merge(sortedLeft, sortedRight, category);
     },
 
@@ -48,11 +16,9 @@ const EA = {
         const merged = [];
         let leftIndex = 0;
         let rightIndex = 0;
-
         while (leftIndex < left.length && rightIndex < right.length) {
             const leftItem = left[leftIndex];
             const rightItem = right[rightIndex];
-
             if (Test.fitness(leftItem, category) >= Test.fitness(rightItem, category)) {
                 merged.push(leftItem);
                 leftIndex++;
@@ -61,17 +27,14 @@ const EA = {
                 rightIndex++;
             }
         }
-
         while (leftIndex < left.length) {
             merged.push(left[leftIndex]);
             leftIndex++;
         }
-
         while (rightIndex < right.length) {
             merged.push(right[rightIndex]);
             rightIndex++;
         }
-
         return merged;
     },
 
@@ -151,14 +114,11 @@ const EA = {
             const fitness2 = Test.fitness(chrom2, category);
             return fitness2 - fitness1; // Sort in descending order
         });
-
         const selected = [];
-
         for (let i = 0; i < selectionSize; i++) {
             const index = Math.floor(Math.random() * sortedPop.length);
             selected.push(sortedPop[index]);
         }
-
         return selected;
     },
 
@@ -167,26 +127,22 @@ const EA = {
         let child2 = []
         let children = []
         let parents = []
-
         //Selection
         if (selection === "true") {
             parents = this.sequentialSelection(pop, category, 2)
         } else {
             parents.push(pop[0], pop[1])
         }
-
         //Crossover
         if (cross === "true") {
             children = this.crossover(parents[0], parents[1])
         } else {
             children.push(parents[0], parents[1])
         }
-
+        //Mutation
         for(let i = 0; i < 2; i++) {
             pop.pop()
         }
-
-        //Mutation
         if (mutation === "flip") {
             child1 = this.flipMutation(children[0])
             child2 = this.flipMutation(children[1])
@@ -204,7 +160,6 @@ const EA = {
             child2 = this.reverseMutation(children[1])
             pop.push(child1, child2)
         }
-
         return pop
     },
 
@@ -221,22 +176,17 @@ const EA = {
 
     stepFreshGA(pop, popSize, chromLength, category, iterations, randomRatio, selection, cross, mutation) {
         for (let i = 0; i < iterations; i++) {
-
             const numRandom = Math.floor(pop.length * randomRatio);
             const newPop = [];
-
             for (let i = 0; i < pop.length - numRandom; i++) {
                 newPop.push(pop[i]);
             }
-
             for (let i = 0; i < numRandom; i++) {
                 const randomChrom = this.genChrom(); // Generiere ein zufälliges Chromosom
                 newPop.push(randomChrom);
             }
-
             pop = this.mergeSort(newPop, category)
             pop = this.mergeSort(this.step(pop, selection, cross, mutation, category), category)
-
             if (Test.fitness(pop[0], category) >= 16) {
                 return pop[0]
             }

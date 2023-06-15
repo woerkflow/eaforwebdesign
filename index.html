@@ -20,11 +20,9 @@
             const select_mutation = document.querySelector('#mutation')
             const range_population = document.querySelector('#pop')
             const range_generations = document.querySelector('#gen')
-
             let duration = []
             let fitness = []
             let output = []
-
             //1000 iterations to test the algorithm
             for (let i = 0; i < 100; i++) {
                 const start = performance.now()
@@ -34,17 +32,14 @@
                 fitness.push(Test.fitness(output, select_category.value))
                 duration.push(time - start)
             }
-
             //Result
             const elements = document.getElementsByClassName('test')
             for (let i = 0; i < elements.length; i++) {
                 Constructor.do(elements[i], output)
             }
-
             //Plots
             plot(fitness, 20, "plot_fitness", "Fitness")
             plot(duration, 10, "plot_duration", "Runtime")
-
             //AVG Badges
             const fitLabel = document.querySelector("#fitLabel")
             fitLabel.textContent = calculateAverage(fitness)
@@ -69,33 +64,28 @@
             for (let i = 0; i < array.length; i++) {
                 xArray.push(i)
             }
-
             // Define Data
             const data = [{
                 x:xArray,
                 y:yArray,
                 mode:"scatter"
             }];
-
             // Define Layout
             const layout = {
                 xaxis: {autorange: true, title: "Iterations"},
                 yaxis: {autorange: true},
                 title: title
             };
-
             Plotly.newPlot(location, data, layout);
         }
 
         window.addEventListener("load", () => {
-
             const valueRandom = document.querySelector("#randomLabel")
             const inputRandom = document.querySelector("#random")
             valueRandom.textContent = inputRandom.value
             inputRandom.addEventListener("input", (event) => {
                 valueRandom.textContent = event.target.value
             })
-
             const selectRefresh = document.querySelector("#refresh")
             const sectionRandom = document.querySelector("#random-section")
             selectRefresh.addEventListener("change", () => {
@@ -105,14 +95,12 @@
                     sectionRandom.style.cssText = 'display:none !important';
                 }
             })
-
             const valuePop = document.querySelector("#popLabel")
             const inputPop = document.querySelector("#pop")
             valuePop.textContent = inputPop.value
             inputPop.addEventListener("input", (event) => {
                 valuePop.textContent = event.target.value
             })
-
             const valueGen = document.querySelector("#genLabel")
             const inputGen = document.querySelector("#gen")
             valueGen.textContent = inputGen.value
