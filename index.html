@@ -99,12 +99,9 @@
             const selectRefresh = document.querySelector("#refresh")
             const sectionRandom = document.querySelector("#random-section")
             selectRefresh.addEventListener("change", () => {
-                console.log(selectRefresh.value)
                 if (selectRefresh.value === "true") {
-                    sectionRandom.style.display = "block";
                     sectionRandom.style.cssText = 'display:block !important';
                 } else {
-                    sectionRandom.style.display = "none";
                     sectionRandom.style.cssText = 'display:none !important';
                 }
             })
