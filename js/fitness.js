@@ -1,4 +1,4 @@
-const Test = {
+class Test {
 
     fitness(chrom, category) {
         let key_red = 0

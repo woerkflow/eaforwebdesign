@@ -19,22 +19,25 @@
             const select_mutation = document.querySelector('#mutation')
             const range_population = document.querySelector('#pop')
             const range_generations = document.querySelector('#gen')
-            let duration = []
-            let fitness = []
+            const duration = []
+            const fitness = []
             let output = []
+            const ea = new EA()
+            const constructor = new Constructor()
+
             //100 iterations to test the algorithm
             for (let i = 0; i < 100; i++) {
                 const start = performance.now()
                 //Chrom-Generation
-                output = EA.run(range_population.value, 18, select_category.value, range_generations.value, select_refresh.value, select_random.value, select_selection.value, select_crossover.value, select_mutation.value)
+                output = ea.run(range_population.value, 18, select_category.value, range_generations.value, select_refresh.value, select_random.value, select_selection.value, select_crossover.value, select_mutation.value)
                 const time = performance.now()
-                fitness.push(Test.fitness(output, select_category.value))
+                fitness.push(ea.test.fitness(output, select_category.value))
                 duration.push(time - start)
             }
             //Result
             const elements = document.getElementsByClassName('test')
             for (let i = 0; i < elements.length; i++) {
-                Constructor.do(elements[i], output)
+                constructor.do(elements[i], output)
             }
             //Plots
             plot(fitness, 20, "plot_fitness", "Fitness")

@@ -1,4 +1,4 @@
-const Constructor = {
+class Constructor {
 
     do(element, chrom) {
         const weight = ["200", "300", "400", "500", "600", "700"]
@@ -141,7 +141,7 @@ const Constructor = {
                     break;
             }
         }
-    },
+    }
 
     contrast(red, green, blue) {
         return 0.2126 * (red/255) + 0.7152 * (green/255) + 0.0722 * (blue/255)
