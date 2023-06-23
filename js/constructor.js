@@ -13,12 +13,12 @@ const Constructor = {
         for (let index = chrom.length - 1; index >= 0; index--) {
             switch(index) {
                 case 17:
-                    if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "BUTTON") {
+                    if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "BUTTON" || element.tagName === "P") {
                         element.style.fontWeight = weight[chrom[index]]
                     }
                     break;
                 case 16:
-                    if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "BUTTON") {
+                    if (element.tagName === "INPUT" || element.tagName === "TEXTAREA" || element.tagName === "BUTTON" || element.tagName === "P") {
                         element.style.fontSize = (chrom[index] + 8) * .125 + "rem"
                     }
                     break;

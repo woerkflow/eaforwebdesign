@@ -38,7 +38,7 @@
             }
             //Plots
             plot(fitness, 20, "plot_fitness", "Fitness")
-            plot(duration, 10, "plot_duration", "Runtime")
+            plot(duration, 10, "plot_duration", "Runtime (Milliseconds)")
             //AVG Badges
             const fitLabel = document.querySelector("#fitLabel")
             fitLabel.textContent = calculateAverage(fitness)
@@ -116,7 +116,7 @@
             <article class="col-12 col-lg-6 ps-lg-0">
                 <form class="border border-1 p-2 p-lg-4 mb-3">
                     <section class="mb-3">
-                        <label class="mb-2" for="category">Select a target category (Difficulty in ascending order)</label>
+                        <label class="mb-2" for="category">Select a target category (difficulty in ascending order)</label>
                         <select class="form-control" id="category">
                             <option value="b2c">Business to Customer</option>
                             <option value="b2b">Business to Business</option>
@@ -126,8 +126,8 @@
                     <section class="mb-3">
                         <label class="mb-2" for="refresh">Select a step operator</label>
                         <select class="form-control" id="refresh">
+                            <option value="false" selected>Normal (recommended)</option>
                             <option value="true">Random Restart</option>
-                            <option value="false" selected>Normal (Recommended)</option>
                         </select>
                     </section>
                     <section class="mb-3 d-none" id="random-section">
@@ -137,14 +137,14 @@
                     <section class="mb-3">
                         <label class="mb-2" for="selection">Select a selection operator</label>
                         <select class="form-control" id="selection">
-                            <option value="true">Sequential Selection (more precise)</option>
                             <option value="false" selected>Top 2 Selection (faster)</option>
+                            <option value="true">Sequential Selection (more precise)</option>
                         </select>
                     </section>
                     <section class="mb-3">
                         <label class="mb-2" for="crossover">Select a Crossover operator</label>
                         <select class="form-control" id="crossover">
-                            <option value="one" selected>One Point (Recommended)</option>
+                            <option value="one" selected>One Point (recommended)</option>
                             <option value="two">Two Point</option>
                             <option value="false">False</option>
                         </select>
@@ -152,8 +152,8 @@
                     <section class="mb-3">
                         <label class="mb-2" for="mutation">Select a mutation operator</label>
                         <select class="form-control" id="mutation">
+                            <option value="value" selected>Value (recommended)</option>
                             <option value="flip">Flip</option>
-                            <option value="value" selected>Value (Recommended)</option>
                             <option value="swap">Swap</option>
                             <option value="reverse">Reverse</option>
                         </select>
@@ -179,30 +179,30 @@
                         <h2 class="test" id="1">Hello!</h2>
                     </section>
                     <section class="test">
-                        <label class="test form-label" id="3">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</label><br>
+                        <p class="test form-label" id="2">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
                     </section>
                     <section class="test">
-                        <textarea class="test w-100 form-control" rows="3" placeholder="Lorem ipsum dolor sit amet." maxlength="120" id="4"></textarea>
-                        <label for=4 class="test">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</label>
+                        <label for=3 class="test">Lorem ipsum:</label>
+                        <textarea class="test w-100 form-control" rows="2" placeholder="Lorem ipsum dolor sit amet." maxlength="120" id="3"></textarea>
                     </section>
                     <section class="test">
-                        <input class="test w-100 form-control" placeholder="Lorem ipsum dolor sit amet." id="5" maxlength="30">
-                        <label for=5 class="test">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</label>
+                        <label for=4 class="test">Sadipscing elitr:</label>
+                        <input class="test w-100 form-control" placeholder="Lorem ipsum dolor sit amet." id="4" maxlength="30">
                     </section>
                     <section class="test">
-                        <input class="test w-100 form-control" type="date" id="8">
-                        <label for=8 class="test">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</label>
+                        <label for=5 class="test">Dolore magna:</label>
+                        <input class="test w-100 form-control" type="date" id="5">
                     </section>
                     <section class="test">
-                        <input class="test w-100 form-control" type="time" id="9">
-                        <label for=9 class="test">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</label>
+                        <label for=6 class="test">Aliquyam erat:</label>
+                        <input class="test w-100 form-control" type="time" id="6">
                     </section>
                     <section class="test">
-                        <input class="test" type="checkbox" id="2">
-                        <label for=2 class="test">I am a checkbox</label>
+                        <label for=7 class="test">I am a checkbox:</label>
+                        <input class="test" type="checkbox" id="7">
                     </section>
                     <section class="test">
-                        <button class="test btn" id="6">Submit</button>
+                        <button class="test btn" id="8">Submit</button>
                     </section>
                 </form>
             </article>
