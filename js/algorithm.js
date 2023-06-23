@@ -66,7 +66,16 @@ const EA = {
         return chrom
     },
 
-    crossover(chrom1, chrom2) {
+    crossoverOnePoint(chrom1, chrom2) {
+        const x = this.getRandomInt(0, chrom1.length - 1)
+        const subSeq1 = chrom1.slice(0, x)
+        const subSeq2 = chrom2.slice(0, x)
+        const child1 = subSeq2.concat(chrom1.slice(x))
+        const child2 = subSeq1.concat(chrom2.slice(x))
+        return [child1, child2]
+    },
+
+    crossoverTwoPoint(chrom1, chrom2) {
         const x = this.getRandomInt(0, chrom1.length - 1)
         const y = this.getRandomInt(0, chrom2.length - 1)
         const start = Math.min(x, y)
@@ -99,8 +108,10 @@ const EA = {
             parents.push(pop[0], pop[1])
         }
         //Crossover
-        if (cross === "true") {
-            children = this.crossover(parents[0], parents[1])
+        if (cross === "two") {
+            children = this.crossoverTwoPoint(parents[0], parents[1])
+        } else if (cross === "one") {
+            children = this.crossoverOnePoint(parents[0], parents[1])
         } else {
             children.push(parents[0], parents[1])
         }
