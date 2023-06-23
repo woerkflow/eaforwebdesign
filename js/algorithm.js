@@ -1,41 +1,11 @@
 const EA = {
 
-    mergeSort(pop, category) {
-        if (pop.length <= 1) {
-            return pop;
-        }
-        const mid = Math.floor(pop.length / 2);
-        const left = pop.slice(0, mid);
-        const right = pop.slice(mid);
-        const sortedLeft = this.mergeSort(left, category);
-        const sortedRight = this.mergeSort(right, category);
-        return this.merge(sortedLeft, sortedRight, category);
-    },
-
-    merge(left, right, category) {
-        const merged = [];
-        let leftIndex = 0;
-        let rightIndex = 0;
-        while (leftIndex < left.length && rightIndex < right.length) {
-            const leftItem = left[leftIndex];
-            const rightItem = right[rightIndex];
-            if (Test.fitness(leftItem, category) >= Test.fitness(rightItem, category)) {
-                merged.push(leftItem);
-                leftIndex++;
-            } else {
-                merged.push(rightItem);
-                rightIndex++;
-            }
-        }
-        while (leftIndex < left.length) {
-            merged.push(left[leftIndex]);
-            leftIndex++;
-        }
-        while (rightIndex < right.length) {
-            merged.push(right[rightIndex]);
-            rightIndex++;
-        }
-        return merged;
+    sortByFitness(pop, category) {
+        return pop.sort((chrom1, chrom2) => {
+            const fitness1 = Test.fitness(chrom1, category);
+            const fitness2 = Test.fitness(chrom2, category);
+            return fitness2 - fitness1; // Sort in descending order
+        });
     },
 
     getRandomInt(min, max) {
@@ -89,9 +59,9 @@ const EA = {
         let left = start
         let right = end - 1
         while (left < right) {
-          [chrom[left], chrom[right]] = [chrom[right], chrom[left]]
-          left++
-          right--
+            [chrom[left], chrom[right]] = [chrom[right], chrom[left]]
+            left++
+            right--
         }
         return chrom
     },
@@ -108,16 +78,11 @@ const EA = {
         return [child1, child2]
     },
 
-    sequentialSelection(pop, category, selectionSize) {
-        const sortedPop = pop.sort((chrom1, chrom2) => {
-            const fitness1 = Test.fitness(chrom1, category);
-            const fitness2 = Test.fitness(chrom2, category);
-            return fitness2 - fitness1; // Sort in descending order
-        });
+    sequentialSelection(pop) {
         const selected = [];
-        for (let i = 0; i < selectionSize; i++) {
-            const index = Math.floor(Math.random() * sortedPop.length);
-            selected.push(sortedPop[index]);
+        for (let i = 0; i < 2; i++) {
+            const index = this.getRandomInt(0, pop.length - 1)
+            selected.push(pop[index]);
         }
         return selected;
     },
@@ -129,7 +94,7 @@ const EA = {
         let parents = []
         //Selection
         if (selection === "true") {
-            parents = this.sequentialSelection(pop, category, 2)
+            parents = this.sequentialSelection(pop, category)
         } else {
             parents.push(pop[0], pop[1])
         }
@@ -166,7 +131,7 @@ const EA = {
     stepGA(pop, category, iterations, selection, cross, mutation) {
         for (let i = 0; i < iterations; i++) {
             const newPop = this.step(pop, selection, cross, mutation, category)
-            pop = this.mergeSort(newPop, category)
+            pop = this.sortByFitness(newPop, category)
             if (Test.fitness(pop[0], category) >= 16) {
                 return pop[0]
             }
@@ -182,11 +147,11 @@ const EA = {
                 newPop.push(pop[i]);
             }
             for (let i = 0; i < numRandom; i++) {
-                const randomChrom = this.genChrom(); // Generiere ein zufälliges Chromosom
+                const randomChrom = this.genChrom();
                 newPop.push(randomChrom);
             }
-            pop = this.mergeSort(newPop, category)
-            pop = this.mergeSort(this.step(pop, selection, cross, mutation, category), category)
+            pop = this.sortByFitness(newPop, category)
+            pop = this.sortByFitness(this.step(pop, selection, cross, mutation, category), category)
             if (Test.fitness(pop[0], category) >= 16) {
                 return pop[0]
             }
@@ -195,7 +160,7 @@ const EA = {
     },
 
     run(popSize, chromLength, category, iterations, refresh, randomRatio, selection, cross, mutation) {
-        const pop = this.mergeSort(this.genPop(popSize, chromLength), category)
+        const pop = this.sortByFitness(this.genPop(popSize, chromLength), category)
         if (iterations <= 0) {
             return pop[0]
         }
