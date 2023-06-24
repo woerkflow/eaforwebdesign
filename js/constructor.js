@@ -83,7 +83,6 @@ class Constructor {
                         } else {
                             element.style.borderColor = "rgba(204,204,204, 1)"
                         }
-                        
                     }
                     if (element.tagName === "BUTTON") {
                         element.style.backgroundColor = "rgb(" + key_red + "," + key_green + "," + key_blue + ")"

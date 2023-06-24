@@ -17,6 +17,15 @@ class EA {
         return Math.floor(Math.random() * (maxi - mini + 1) + mini);
     }
 
+    getRandomIndices(min, max) {
+        const x = this.getRandomInt(min, max);
+        let y = this.getRandomInt(min, max);
+        while (y === x) {
+            y = this.getRandomInt(min, max);
+        }
+        return [x, y];
+    }
+
     genChrom(chromLength) {
         return Array.from({ length: chromLength }, () =>
             this.getRandomInt(0, 5)
@@ -24,7 +33,9 @@ class EA {
     }
 
     genPop(popSize, chromLength) {
-        return Array.from({ length: popSize }, () => this.genChrom(chromLength));
+        return Array.from({ length: popSize }, () =>
+            this.genChrom(chromLength)
+        );
     }
 
     swapMutation(chrom) {
@@ -59,15 +70,6 @@ class EA {
         return chrom;
     }
 
-    getRandomIndices(min, max) {
-        const x = this.getRandomInt(min, max);
-        let y = this.getRandomInt(min, max);
-        while (y === x) {
-            y = this.getRandomInt(min, max);
-        }
-        return [x, y];
-    }
-
     crossoverOnePoint(chrom1, chrom2) {
         const x = this.getRandomInt(0, chrom1.length - 1);
         const subSeq1 = chrom1.slice(0, x);
@@ -89,12 +91,12 @@ class EA {
     }
 
     sequentialSelection(pop) {
-        const selected = [];
+        const selected = []
         for (let i = 0; i < 2; i++) {
             const index = this.getRandomInt(0, pop.length - 1);
             selected.push(pop[index]);
         }
-        return selected;
+        return selected
     }
 
     step(pop, selection, cross, mutation, category) {
@@ -150,17 +152,7 @@ class EA {
         return pop[0];
     }
 
-    stepFreshGA(
-        pop,
-        popSize,
-        chromLength,
-        category,
-        iterations,
-        randomRatio,
-        selection,
-        cross,
-        mutation
-    ) {
+    stepFreshGA(pop, popSize, chromLength, category, iterations, randomRatio, selection, cross, mutation) {
         for (let i = 0; i < iterations; i++) {
             const numRandom = Math.floor(pop.length * randomRatio);
             const newPop = pop.slice(0, pop.length - numRandom);
@@ -169,10 +161,7 @@ class EA {
                 newPop.push(randomChrom);
             }
             pop = this.sortByFitness(newPop, category);
-            pop = this.sortByFitness(
-                this.step(pop, selection, cross, mutation, category),
-                category
-            );
+            pop = this.sortByFitness(this.step(pop, selection, cross, mutation, category), category);
             if (this.test.fitness(pop[0], category) >= 16) {
                 return pop[0];
             }
@@ -180,33 +169,13 @@ class EA {
         return pop[0];
     }
 
-    run(
-        popSize,
-        chromLength,
-        category,
-        iterations,
-        refresh,
-        randomRatio,
-        selection,
-        cross,
-        mutation
-    ) {
+    run(popSize, chromLength, category, iterations, refresh, randomRatio, selection, cross, mutation) {
         let pop = this.sortByFitness(this.genPop(popSize, chromLength), category);
         if (iterations <= 0) {
             return pop[0];
         }
         if (refresh === "true") {
-            return this.stepFreshGA(
-                pop,
-                popSize,
-                chromLength,
-                category,
-                iterations,
-                randomRatio,
-                selection,
-                cross,
-                mutation
-            );
+            return this.stepFreshGA(pop, popSize, chromLength, category, iterations, randomRatio, selection, cross, mutation);
         }
         return this.stepGA(pop, category, iterations, selection, cross, mutation);
     }
