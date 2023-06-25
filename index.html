@@ -86,10 +86,10 @@
             inputRandom.addEventListener("input", (event) => {
                 valueRandom.textContent = event.target.value
             })
-            const selectRefresh = document.querySelector("#refresh")
+            const selectRestart = document.querySelector("#restart")
             const sectionRandom = document.querySelector("#random-section")
-            selectRefresh.addEventListener("change", () => {
-                if (selectRefresh.value === "true") {
+            selectRestart.addEventListener("change", () => {
+                if (selectRestart.value === "true") {
                     sectionRandom.style.cssText = 'display:block !important';
                 } else {
                     sectionRandom.style.cssText = 'display:none !important';
