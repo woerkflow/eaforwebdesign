@@ -112,12 +112,14 @@
 </head>
 <body>
     <section class="container p-3">
-        <h2 class="display-1 mt-3 mb-5">Evolutionary Algorithm for Web Design</h2>
+        <section class="d-flex justify-content-center">
+            <h2 class="display-2 mt-3 mb-5">Evolutionary Algorithm for Web Design</h2>
+        </section>
         <section class="row">
             <article class="col-12 col-lg-6 ps-lg-0">
                 <form class="border border-1 p-2 p-lg-4 mb-3">
                     <section class="mb-3">
-                        <label class="mb-2" for="category">Select a target category (difficulty in ascending order)</label>
+                        <label class="mb-2" for="category">Select a target category (difficulty in ascending order):</label>
                         <select class="form-control" id="category">
                             <option value="b2c">Business to Customer</option>
                             <option value="b2b">Business to Business</option>
@@ -125,25 +127,25 @@
                         </select>
                     </section>
                     <section class="mb-3">
-                        <label class="mb-2" for="refresh">Select a step operator</label>
+                        <label class="mb-2" for="refresh">Select a step operator:</label>
                         <select class="form-control" id="refresh">
                             <option value="false" selected>Normal (recommended)</option>
                             <option value="true">Random Restart</option>
                         </select>
                     </section>
                     <section class="mb-3 d-none" id="random-section">
-                        <label class="control-label" for="random">Select a random ratio <span class="badge bg-secondary" id="randomLabel">0</span></label>
+                        <label class="control-label" for="random">Select a random ratio: <span class="badge bg-secondary" id="randomLabel">0</span></label>
                         <input class="form-range" type="range" min="0" max="1" step="0.01" id="random">
                     </section>
                     <section class="mb-3">
-                        <label class="mb-2" for="selection">Select a selection operator</label>
+                        <label class="mb-2" for="selection">Select a selection operator:</label>
                         <select class="form-control" id="selection">
                             <option value="false" selected>Top 2 Selection (faster)</option>
                             <option value="true">Sequential Selection (more precise)</option>
                         </select>
                     </section>
                     <section class="mb-3">
-                        <label class="mb-2" for="crossover">Select a Crossover operator</label>
+                        <label class="mb-2" for="crossover">Select a Crossover operator:</label>
                         <select class="form-control" id="crossover">
                             <option value="one" selected>One Point (recommended)</option>
                             <option value="two">Two Point</option>
@@ -151,7 +153,7 @@
                         </select>
                     </section>
                     <section class="mb-3">
-                        <label class="mb-2" for="mutation">Select a mutation operator</label>
+                        <label class="mb-2" for="mutation">Select a mutation operator:</label>
                         <select class="form-control" id="mutation">
                             <option value="value" selected>Value (recommended)</option>
                             <option value="flip">Flip</option>
@@ -160,16 +162,16 @@
                         </select>
                     </section>
                     <section class="mb-3">
-                        <label class="control-label" for="pop">Population size <span class="badge bg-secondary" id="popLabel">500</span></label>
+                        <label class="control-label" for="pop">Population size: <span class="badge bg-secondary" id="popLabel">20</span></label>
                         <input class="form-range" type="range" min="5" max="40" id="pop">
                     </section>
                     <section class="mb-3">
-                        <label class="control-label" for="gen">Number of generations <span class="badge bg-secondary" id="genLabel">500</span></label>
+                        <label class="control-label" for="gen">Number of generations: <span class="badge bg-secondary" id="genLabel">500</span></label>
                         <input class="form-range" type="range" min="0" max="1000" id="gen">
                     </section>
                     <section class="mb-3 row">
                         <div class="col-12 d-flex justify-content-end">
-                            <div class="d-flex justify-content-center align-items-center btn btn-primary" onclick="parse()">Generate</div>
+                            <div class="d-flex justify-content-center align-items-center btn btn-primary" onclick="parse()">Create</div>
                         </div>
                     </section>
                 </form>
@@ -210,8 +212,8 @@
             <article class="col-12 mt-3 p-3 p-lg-0">
                 <form class="border border-1 p-2 p-lg-4 m-0">
                     <section class="col-12 d-flex flex-column flex-lg-row justify-content-lg-evenly p-0">
-                        <label class="control-label">Avg Fitness (Max. 16) <span class="badge bg-secondary" id="fitLabel">0</span></label>
-                        <label class="control-label">Avg Runtime (Milliseconds) <span class="badge bg-secondary" id="durLabel">0</span></label>
+                        <label class="control-label">Avg Fitness (Max. 16) <span class="badge bg-primary" id="fitLabel">0</span></label>
+                        <label class="control-label">Avg Runtime (Milliseconds) <span class="badge bg-primary" id="durLabel">0</span></label>
                     </section>
                     <section class="col-12 p-0">
                         <article id="plot_fitness"></article>
