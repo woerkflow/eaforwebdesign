@@ -14,7 +14,7 @@
             const select_random = document.querySelector('#random')
             const select_category = document.querySelector('#category')
             const select_selection = document.querySelector('#selection')
-            const select_refresh = document.querySelector('#refresh')
+            const select_restart = document.querySelector('#restart')
             const select_crossover = document.querySelector('#crossover')
             const select_mutation = document.querySelector('#mutation')
             const range_population = document.querySelector('#pop')
@@ -28,7 +28,7 @@
             for (let i = 0; i < 100; i++) {
                 const start = performance.now()
                 //Chrom-Generation
-                output = ea.run(range_population.value, 18, select_category.value, range_generations.value, select_refresh.value, select_random.value, select_selection.value, select_crossover.value, select_mutation.value)
+                output = ea.run(range_population.value, 18, select_category.value, range_generations.value, select_restart.value, select_random.value, select_selection.value, select_crossover.value, select_mutation.value)
                 const time = performance.now()
                 fitness.push(ea.test.fitness(output, select_category.value))
                 duration.push(time - start)
@@ -127,8 +127,8 @@
                         </select>
                     </section>
                     <section class="mb-3">
-                        <label class="mb-2" for="refresh">Select a step operator:</label>
-                        <select class="form-control" id="refresh">
+                        <label class="mb-2" for="restart">Select a step operator:</label>
+                        <select class="form-control" id="restart">
                             <option value="false" selected>Normal (recommended)</option>
                             <option value="true">Random Restart</option>
                         </select>
