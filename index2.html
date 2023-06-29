@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Evolutionary Algorithm for Webdesign</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/fitness2.js"></script>
+    <script src="js/algorithm.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script>
+        function parse() {
+            const select_category = document.querySelector('#category')
+            const fitness = []
+            const ea = new EA()
+            //100 iterations to test the algorithm
+            function generateCombinations() {
+                var digits = [0, 1, 2, 3, 4, 5];
+                var combinations = [];
+
+                for (var i = 0; i < digits.length; i++) {
+                    for (var j = 0; j < digits.length; j++) {
+                        for (var k = 0; k < digits.length; k++) {
+                            var combination = [digits[i], digits[j], digits[k]];
+                            combinations.push(combination);
+                        }
+                    }
+                }
+                return combinations;
+            }
+
+            const output = generateCombinations();
+            for (let i = 0; i < output.length; i++) {
+                //Chrom-Generation
+                fitness.push(ea.test.fitness(output[i], select_category.value))
+            }
+
+            //Result
+            const elements = document.getElementsByClassName('test')
+            for (let i = 0; i < elements.length; i++) {
+                constructor.do(elements[i], output)
+            }
+            //Plots
+            plot(fitness, "plot_fitness", "Fitness")
+            //AVG Badges
+            const fitLabel = document.querySelector("#fitLabel")
+            fitLabel.textContent = calculateAverage(fitness)
+            const durLabel = document.querySelector("#durLabel")
+            durLabel.textContent = calculateAverage(duration)
+        }
+
+        function calculateAverage(array) {
+            let total = 0;
+            let count = 0;
+            array.forEach(function(item) {
+                total += item;
+                count++;
+            });
+            return total / count;
+        }
+
+        function plot(array, location, title){
+            const xArray = []
+            const yArray = array
+            for (let i = 0; i < array.length; i++) {
+                xArray.push(i)
+            }
+            // Define Data
+            const data = [{
+                x:xArray,
+                y:yArray,
+                mode:"scatter"
+            }];
+            // Define Layout
+            const layout = {
+                xaxis: {autorange: true, title: "Iterations"},
+                yaxis: {autorange: true},
+                title: title
+            };
+            Plotly.newPlot(location, data, layout);
+        }
+    </script>
+</head>
+<body>
+    <section class="container p-3">
+        <h2 class="display-1 mt-3 mb-5">Evolutionary Algorithms in Web Design</h2>
+        <section class="row">
+            <article class="col-12 ps-lg-0">
+                <form class="border border-1 p-2 p-lg-4 mb-3">
+                    <section class="mb-3">
+                        <label class="mb-2" for="category">Select a target category (difficulty in ascending order)</label>
+                        <select class="form-control" id="category">
+                            <option value="b2c">Business to Customer</option>
+                            <option value="b2b">Business to Business</option>
+                            <option value="neutral">Neutral</option>
+                        </select>
+                        <section class="mb-3 row">
+                            <div class="col-12 d-flex justify-content-end">
+                                <div class="d-flex justify-content-center align-items-center btn btn-primary" onclick="parse()">Generate</div>
+                            </div>
+                        </section>
+                    </section>
+                </form>
+            </article>
+            <article class="col-12 mt-3 p-3 p-lg-0">
+                <form class="border border-1 p-2 p-lg-4 m-0">
+                    <section class="col-12 p-0">
+                        <article id="plot_fitness"></article>
+                    </section>
+                </form>
+            </article>
+        </section>
+    </section>
+</body>
+</html>
